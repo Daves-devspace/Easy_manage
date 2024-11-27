@@ -1,0 +1,147 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block body %}
+
+
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Student Details</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'students' %}">Student</a></li>
+                        <li class="breadcrumb-item active">Student Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="about-info">
+                            <h4>About &nbsp; {{student.first_name}} </h4>
+
+                            <div class="media mt-3 w-100 col-md-4">
+                                <a href="#" class="avatar avatar-sm mr-2 ">
+                                    {% if student.student_image %}
+                                    <img class="avatar-img rounded-circle w-100" src="{{ student.student_image.url }}"
+                                        alt="User Image">
+                                    {% else %}
+                                    <img class="avatar-img rounded-circle w-100"
+                                        src="{% static 'assets\img\user.jpg' %}" alt="Default Image">
+                                    {% endif %}
+                                </a>
+                                
+                            </div>
+                            <div class="media-body">
+                                <ul>
+                                    <li>
+                                        <span class="title-span">Full Name : </span>
+                                        <span class="info-span">{{student.first_name}} &nbsp; {{student.last_name}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="title-span">Section : </span>
+                                        <span class="info-span">{{student.section}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="title-span">Class : </span>
+                                        <span class="info-span">{{student.grade}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="title-span">Phone Number: </span>
+                                        <span class="info-span"><a href="{{ student.parent.father_mobile}}">
+                                            {{student.parent.father_mobile }}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="title-span">Phone Number: </span>
+                                        <span class="info-span"><a
+                                                href="{{student.parent.mother_mobile }}">{{student.parent.mother_mobile}}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="title-span">Gender : </span>
+                                        <span class="info-span">{{student.gender}}</span>
+                                    </li>
+                                    <li>
+                                        <span class="title-span">Term Fee : </span>
+                                        <span class="info-span">{{term_fee}}</span>
+                                    </li>
+                                    <!-- <li>
+                                        <span class="title-span">Fee Balance: </span>
+                                        <span class="info-span">{{ fee_balance }}</span>
+                                    </li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                  <h2>Fee Details:</h2>
+                                  <a class="btn btn-success" href="{% url 'add_fee' student.id %}">Pay Fee</a>
+                                 <div class="table-responsive">
+                                  <table class="table table-striped mt-3">
+                                      <thead>
+                                          <tr>
+                                              <th>Date</th>
+                                              <th>Amount Due</th>
+                                              <th>Amount Paid</th>
+                                              <th>Term Fee</th>
+                                              <th>Balance</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {% if fee_records %}
+                                              {% for fee in fee_records %}
+                                              <tr>
+                                                  <td>{{ fee.date }}</td>
+                                                  <td>{{ fee.amount_due }}</td>
+                                                  <td>{{ fee.amount_paid }}</td>
+                                                  <td>{{ term_fee }}</td>
+                                                  <td>{{ fee.remaining_balance }}</td>
+                                              </tr>
+                                              {% endfor %}
+                                          {% else %}
+                                              <tr>
+                                                  <td colspan="3" class="text-center">No fee records found.</td>
+                                              </tr>
+                                          {% endif %}
+                                      </tbody>
+                                  </table>  
+                                  
+                                </div> 
+                                  <p>ADD MORE DETAILS</p>
+                              </div>
+                          </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Copyright © 2024 davedev</p>
+</footer>
+
+</div>
+
+</div>
+
+
+<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="{%static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{%static 'assets/js/popper.min.js' %}"></script>
+<script src="{%static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{%static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{%static 'assets/js/script.js' %}"></script>
+</body>
+
+<!-- Mirrored from preschool.dreamguystech.com/html-template/student-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:50 GMT -->
+
+</html>
+{% endblock %}
